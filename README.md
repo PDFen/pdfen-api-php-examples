@@ -6,6 +6,7 @@ INSTALLATION
 
 2. Put your credientials in /Config/Config.php
 $this->aConnectInfo['username'] = 'set your PDFen.com user name (e-mail) here'; /* First create an account on https://www.pdfen.com/register */
+
 $this->aConnectInfo['password'] = 'set your PDFen.com password here';
 
 3. Choose an example, e.g. How to convert MSG file to PDF
