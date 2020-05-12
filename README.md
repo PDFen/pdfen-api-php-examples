@@ -1,6 +1,9 @@
 # pdfen-api-php-examples
 PHP examples how to link to the API of PDFen.com
 
+Not a PHP developer? But you are a programmer? Then these PHP examples should still make it clear how to call the REST API of PDFen.com. 
+However do not hesitate to contact us contact@pdfen.com if you have any questions, remarks or need help.
+
 INSTALLATION
 1. Download or clone the project
 
