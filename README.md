@@ -5,14 +5,14 @@ INSTALLATION
 1. Download or clone the project
 
 2. Put your credientials in /Config/Config.php
-> $this->aConnectInfo['username'] = 'set your PDFen.com user name (e-mail) here';
-> $this->aConnectInfo['password'] = 'set your PDFen.com password here';
+$this->aConnectInfo['username'] = 'set your PDFen.com user name (e-mail) here';
+$this->aConnectInfo['password'] = 'set your PDFen.com password here';
 
 3. Choose an example, e.g. How to convert MSG file to PDF
 Example: Examples\convert-one-msg-file.php and adjust:
-> $aFileInfo['file_name_or_title'] = 'my test msg file'; /* change your title here */
-> $aFileInfo['extension'] = 'msg'; /* Set the extension */
-> $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/pdfenoutlookimagepdf.msg'; /* Absolute path to your source file. Check if you need to use / or \ (linux vs windows */
+$aFileInfo['file_name_or_title'] = 'my test msg file'; /* change your title here */
+$aFileInfo['extension'] = 'msg'; /* Set the extension */
+$aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/pdfenoutlookimagepdf.msg'; /* Absolute path to your source file. Check if you need to use / or \ (linux vs windows */
 
 
 4. Run the php program, e.g.:
@@ -22,6 +22,7 @@ http://localhost/pdfen-api-php-examples/Examples/convert-one-msg-file.php
 
 
 PROJECT Content
+
 /Config/Config.php
 Change the username and password
 
