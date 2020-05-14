@@ -9,11 +9,15 @@ However do not hesitate to contact us contact@pdfen.com if you have any question
 ## INSTALLATION
 1. Download or clone the project
 
-2. Put your credientials in /Config/Config.php
+2. Prepare config:
 
-    $this->aConnectInfo['username'] = 'set your PDFen.com user name (e-mail) here';
+    - Rename /Config/RenameFileToConfig.php to /Config/Config.php and change credientials in /Config/Config.php
+    
+    - Change your PDFen.com creditials:
 
-    $this->aConnectInfo['password'] = 'set your PDFen.com password here';
+            $this->aConnectInfo['username'] = 'set your PDFen.com user name (e-mail) here';
+
+            $this->aConnectInfo['password'] = 'set your PDFen.com password here';
 
 3. Choose an example, e.g. How to convert MSG file to PDF
 
