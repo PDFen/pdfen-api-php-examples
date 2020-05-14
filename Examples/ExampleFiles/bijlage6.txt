@@ -1,0 +1,29 @@
+Via een directe verbinding met uw systeem
+Indien u vaak gebruik maakt van PDFen en/of uw heeft een groot aantal documenten dat u wilt converteren en samenvoegen dan kunt u PDFen gebruiken via een directe verbinding met uw eigen systeem. Dit is nog makkelijker en sneller.
+Ook als uw documenten al op internet of intranet staan is deze mogelijkheid meer geschikt. PDFen kan dan automatisch alle documenten uploaden, converteren en samenvoegen.
+ 
+Nadat u zich heeft aangemeld logt u in op www.pdfen.nl. U kiest een layout voor het document en biedt vervolgens de te converteren documenten aan via de directe verbinding. Per omgaande krijgt u het vergaderdocument of dossiers weer terug en is het klaar voor gebruik op de ipad, tablet of e-reader.
+ 
+Bij de eerste keer dat u PDFen gebruikt maakt u een of meerdere standaard profielen aan voor uw vergaderdocument en/of dossiers. Zo kunt u zelf de layout van uw documenten bepalen en aanpassen aan uw huisstijl. Op het moment dat u gebruik maakt van PDFen hoeft u alleen nog maar aan te geven welk profiel u wilt gebruiken.
+ 
+Bij een directe verbinding koppelen we PDFen aan uw systeem. Hoe dat technisch werkt kunt u hieronder lezen in het technisch overzicht ontwikkelaars
+
+
+Ontwikkelaars
+Standaard api / service voor koppeling met (CMS) systeem
+PDFen biedt een standaard api / service om geautomatiseerd uw documenten aan te leveren en het gegenereerde document weer terug te ontvangen. Met zeer beperkte software aanpassingen heeft u snel een koppeling gerealiseerd met PDFen
+
+Hoe werkt het
+U meldt zich aan en neemt een licentie naar keuze. Zie Kosten
+PDFen verwacht een xml met de te pdfen documenten informatie van uw systeem
+Het xml bestand moet voldoen aan de volgende xsd: request xsd pdfen
+Een voorbeeld van een request xml bestand
+Uitleg xml bestand
+PDFen biedt een url  aan waar u dit xml bestand naar toe kan sturen: http://www.pdfen.nl/service. U hoeft alleen de xml hiernaar toe te sturen (name=xmlfile). Klik hier voor een voorbeeld van een formulier
+PDFen zal na het verwerken een pdf terug geven met daarin de url waar de gegenereerde pdf opgehaald kan worden
+Zie response xsd pdfen waar de xml aan moet voldoen
+Een voorbeeld van een response xml bestand
+Uitleg xml bestand
+Uw systeem (of u zelf) kan aan de hand van deze url het gegenereerde pdf bestand ophalen bij PDFen en toevoegen aan een dossier.
+Let op: Uw systeem zal dus aangepast moeten worden om het mogelijk te maken om deze xml te genereren, versturen en te ontvangen/verwerken *
+* Mocht u of de leverancier van uw CMS ondersteuning nodig hebben bij de realisatie van de koppeling, neemt u dan gerust contact op via het contactformulier. PDFen kan u helpen bij het ontwerp, bouw en testen van deze koppeling. De kosten zullen afhankelijk zijn van de wensen, eisen en aart van het cms systeem.

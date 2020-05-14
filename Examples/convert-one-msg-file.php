@@ -33,7 +33,7 @@ $aProcess = $oApi->startProcess($aSession);
 /* Check all the information you can check by var_dump($aProcess) */
 
 echo '<h2>Finished</h2>';
-echo 'Converting the file ' . $aFileInfo['file_name_or_title'] . ' finished successful<br/>';
+echo 'Converting the email ' . $aFileInfo['file_name_or_title'] . ' finished successful<br/>';
 echo '<a href="' .  $aProcess['process_result']['url'] . '" target="_blank" >Download result </a>';
 
 

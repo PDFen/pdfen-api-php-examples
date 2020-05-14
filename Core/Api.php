@@ -149,6 +149,42 @@ class Api
 
 
     /**
+     *
+     * Set the ordering of the files how you want them to be placed in the merged PDF file (or even ordered in the created zip file if you choose for convertion only)
+     *
+     * $aOrdering contains a array with ordering.
+     *
+     *  Basic Example:
+     *      $aOrdering = ["file_id[1]","file_id[2]","file_id[3]"]
+     *
+     *  Example with chapters/Folders:
+     *      $aOrdering = [{"title":"Chapter 1","children":["15d65f99-b499-4a21-8b2c-5ce9cd2c6f44"]},{"title":"Chapter 2","children":["1689a607-2d4e-4778-8875-7f40d46b1f08","b2b4ea3f-5cd1-4a22-93d5-621b25885307"]}]
+     *      $aOrdering = [{"title":"Chapter 1","children":["file_id[1]"]},{"title":"Chapter 2","children":["file_id[2]","file_id[3]"]}]
+     *
+     * @param $aSession
+     * @param array $aOrdering
+     * @return mixed
+     */
+    public function setOrdering($aSession, $aOrdering = [])
+    {
+
+        /* Step 1, create the file object in the session */
+        $result = $this->callAPI('PUT', $this->aConnectInfo['api_root_url'] . 'sessions/' . $aSession["session_id"] . '/ordering', json_encode($aOrdering));
+        //$aResult = json_decode($result, true);
+
+        if ( empty($result)) {
+            echo 'ERROR: Setting ordering  in session failed';
+            /* Something went wrong, check message */
+            var_dump($aFile);
+            die();
+        }
+
+        return true;
+
+    }
+
+
+    /**
      * Get all the set options from the session
      *
      * GET: https://www.pdfen.com/api/v1/sessions/{session_id}/options
@@ -200,6 +236,78 @@ class Api
 
         return $aOptions;
     }
+
+    /**
+     *
+     * Function to set the title of the result (PDF)
+     *
+     * PUT: https://www.pdfen.com/api/v1/sessions/{session_id}/options
+     *
+     * @param $aSession
+     * @param $aOptions
+     * @param $title
+     * @return mixed, all set options
+     */
+    public function setTitle($aSession, $aOptions,$title='My Title')
+    {
+
+        $aOptionsNew['maintitle'] = $title;
+        $aOptionsNew['template_id'] = $aOptions['template_id'];
+
+        $result = $this->callAPI('PUT', $this->aConnectInfo['api_root_url'] . 'sessions/' . $aSession["session_id"] . '/options', json_encode($aOptionsNew));
+        /* Note $result is empty on success */
+        unset($result);
+        $aOptionsResult = $this->getOptions($aSession);
+
+        if ( !is_array($aOptionsResult) || !isset($aOptionsResult['maintitle']) || $aOptionsResult['maintitle'] != $title) {
+            echo 'ERROR: Title option was not set';
+            var_dump($aOptionsResult);
+            die();
+        }
+
+        return $aOptions;
+    }
+
+
+    /**
+     *
+     * Function to force conversion to PDF/A (Archive).
+     *
+     * Possible $pdfType:
+     *  Default: pdfa or 2AUB (Best Possible PDF/A format, default/recommended)
+     *  Others: 1A,1B,1AB,2A,2B,2U,2UB,3A,3B,3U,3UB,3AUB
+     *  Reset to normal PDF again: normal
+     *
+     *
+     * You can read here more what the difference are in PDF/A type: https://www.pdfen.com/what-is-pdfa
+     *
+     * PUT: https://www.pdfen.com/api/v1/sessions/{session_id}/options
+     *
+     * @param $aSession
+     * @param $aOptions
+     * @param $pdfType
+     * @return mixed, all set options
+     */
+    public function setPDFA($aSession, $aOptions, $pdfType='pdfa')
+    {
+
+        $aOptionsNew['pdftype'] = $pdfType;
+        $aOptionsNew['template_id'] = $aOptions['template_id'];
+
+        $result = $this->callAPI('PUT', $this->aConnectInfo['api_root_url'] . 'sessions/' . $aSession["session_id"] . '/options', json_encode($aOptionsNew));
+        /* Note $result is empty on success */
+        unset($result);
+        $aOptionsResult = $this->getOptions($aSession);
+
+        if ( !is_array($aOptionsResult) || !isset($aOptionsResult['pdftype']) || $aOptionsResult['pdftype'] != $pdfType ) {
+            echo 'ERROR: PDF/A option was not set';
+            var_dump($aOptionsResult);
+            die();
+        }
+
+        return $aOptions;
+    }
+
 
     /**
      *

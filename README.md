@@ -6,6 +6,10 @@ PHP examples how to link to the **REST API** of **PDFen.com**
 Then these PHP examples should still make it clear how to call the REST API of PDFen.com. 
 However do not hesitate to contact us contact@pdfen.com if you have any questions, remarks or need help.
 
+### What can PDFen.com convert and merge?
+In the article below, you can change all the file formats PDFen.com supports:
+https://www.pdfen.com/faq/what-extensions-can-pdfen-convert-to-pdf
+
 ## INSTALLATION
 1. Download or clone the project
 
