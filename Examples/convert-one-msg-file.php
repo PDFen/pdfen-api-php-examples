@@ -15,6 +15,7 @@ $aFileInfo['extension'] = 'msg'; /* Set the extension */
 $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/pdfenoutlookimagepdf.msg'; /* Absolute path to your source file. */
 
 $result = $oApi->createNewFile($aSession,$aFileInfo);
+$aFiles[] = $result['file_id'];
 
 /* Note: you can repeat point 2 to add more than one file into the session. Files do NOT need to be the same format. Combinations of docx, doc, msg, eml, etc can be possible */
 
@@ -29,6 +30,9 @@ $aOptions = $oApi->setBatch($aSession,$aOptions);
 
 /* 4. Now we are ready to convert the file (msg in this example), with the function startProcess. */
 $aProcess = $oApi->startProcess($aSession);
+
+/* 5. Remove all (uploaded files) */
+$deleteResult = $oApi->deleteUploadedFiles($aSession,$aFiles);
 
 /* Check all the information you can check by var_dump($aProcess) */
 

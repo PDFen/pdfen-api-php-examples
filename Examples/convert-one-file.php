@@ -36,6 +36,9 @@ $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/bijlage1.doc'; /* Absolute
 
 $result = $oApi->createNewFile($aSession,$aFileInfo);
 
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $result['file_id'];
+
 /* Note: you can repeat point 2 to add more than one file into the session. Files do NOT need to be the same format. Combinations of docx, doc, msg, eml, etc can be possible */
 
 
@@ -50,7 +53,11 @@ $aOptions = $oApi->setBatch($aSession,$aOptions);
 /* 4. Now we are ready to convert the file (msg in this example), with the function startProcess. */
 $aProcess = $oApi->startProcess($aSession);
 
+/* 5. Remove all (uploaded files) */
+$deleteResult = $oApi->deleteUploadedFiles($aSession,$aFiles);
+
 /* Check all the information you can check by var_dump($aProcess) */
+
 
 echo '<h2>Finished</h2>';
 echo 'Converting the file ' . $aFileInfo['file_name_or_title'] . ' finished successful<br/>';

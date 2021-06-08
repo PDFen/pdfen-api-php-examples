@@ -17,6 +17,8 @@ $aFileInfo['extension'] = 'msg'; /* Set the extension */
 $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/pdfenoutlookimagepdf.msg'; /* Absolute path to your source file. */
 
 $result = $oApi->createNewFile($aSession,$aFileInfo);
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $result['file_id'];
 
 /* Again adding a second one */
 
@@ -25,6 +27,8 @@ $aFileInfo['extension'] = 'doc'; /* Set the extension */
 $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/bijlage1.doc'; /* Absolute path to your source file. */
 
 $result = $oApi->createNewFile($aSession,$aFileInfo);
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $result['file_id'];
 
 /* Etc */
 
@@ -39,6 +43,9 @@ $aOptions = $oApi->setBatch($aSession,$aOptions);
 
 /* 4. Now we are ready to convert the file (msg in this example), with the function startProcess. */
 $aProcess = $oApi->startProcess($aSession);
+
+/* 5. Remove all (uploaded files) */
+$deleteResult = $oApi->deleteUploadedFiles($aSession,$aFiles);
 
 /* Check all the information you can check by var_dump($aProcess) */
 

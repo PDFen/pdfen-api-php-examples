@@ -41,6 +41,13 @@ class Api
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
                 }
                 break;
+            case "DELETE":
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+                if ($data) {
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                }
+                break;
+
             default:
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',));
                 if ($data) {
@@ -376,6 +383,45 @@ class Api
 
         /* Status is OK */
         return $aProcess;
-    }
+    } /* END startProcess */
+
+    /**
+     * Delete all uploaded files
+     *
+     * for all  ($aFiles)
+     * DELETE: https://www.pdfen.com/api/v1/sessions/{session_id}/files/{file_id}
+     *
+     * @param $aSession
+     * @param $aFiles
+     * @return true (or die)
+     */
+    public function deleteUploadedFiles($aSession, $aFiles)
+    {
+
+        /* Loop trough all the uploaded files and remove them one by one */
+        if (is_array($aFiles) && count($aFiles) > 0) {
+            foreach ($aFiles as $key => $file_id) {
+
+                $result = $this->callAPI('DELETE', $this->aConnectInfo['api_root_url'] . 'sessions/' . $aSession["session_id"] . '/files/' . $file_id, NULL);
+                $aProcess = json_decode($result, true);
+
+                if ( empty($aProcess)) {
+                    /* All went well */
+                    continue;
+                }
+                else {
+                    if (!is_array($aProcess) || $aProcess['process_result']['status'] == 'ERROR' || empty($aProcess['process_result']['url'])) {
+                        echo 'ERROR: Deleting the file failed';
+                        var_dump($aProcess);
+                        die();
+                    }
+                }
+            }
+        }
+
+        /* Status is OK */
+        return true;
+    } /* END deleteUploadedFiles */
+
 
 }

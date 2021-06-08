@@ -10,7 +10,6 @@ $oApi = new Api();
 
 $aSession = $oApi->startSession(); /* Username and password can be set in /Config/Config.php */
 
-
 /* 2. Now we can create multiple file objects (files we would like to convert) in the session. */
 
 /* 2a. Add the files */
@@ -22,6 +21,9 @@ $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/pdfenoutlookimagepdf.msg';
 $aResult = $oApi->createNewFile($aSession,$aFileInfo);
 $aOrdering[] = $aResult['file_id'];
 
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $aResult['file_id'];
+
 /* Again a second one */
 $aFileInfo['file_name_or_title'] = 'my test file 2'; /* change your title here */
 $aFileInfo['extension'] = 'doc'; /* Set the extension */
@@ -30,6 +32,9 @@ $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/bijlage1.doc'; /* Absolute
 $aResult = $oApi->createNewFile($aSession,$aFileInfo);
 $aOrdering[] = $aResult['file_id'];
 
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $aResult['file_id'];
+
 /* Again a third one */
 $aFileInfo['file_name_or_title'] = 'my test file 3'; /* change your title here */
 $aFileInfo['extension'] = 'jpg'; /* Set the extension */
@@ -37,6 +42,9 @@ $aFileInfo['source_path'] =  __DIR__ . '/ExampleFiles/bijlage5.jpg'; /* Absolute
 
 $aResult = $oApi->createNewFile($aSession,$aFileInfo);
 $aOrdering[] = $aResult['file_id'];
+
+/* Collect files, so we can remove them at once at the end */
+$aFiles[] = $aResult['file_id'];
 
 /* Etc */
 
@@ -58,6 +66,9 @@ $aOptions = $oApi->setTitle($aSession,$aOptions,'My merged files');
 
 /* 4. Now we are ready to convert the file (msg in this example), with the function startProcess. */
 $aProcess = $oApi->startProcess($aSession);
+
+/* 5. Remove all (uploaded files) */
+$deleteResult = $oApi->deleteUploadedFiles($aSession,$aFiles);
 
 /* Check all the information you can check by var_dump($aProcess) */
 
